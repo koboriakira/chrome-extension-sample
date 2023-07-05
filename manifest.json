@@ -1,24 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "My First Extension",
+  "name": "Hello Extensions of the world!",
+  "description": "Base Level Extension",
   "version": "1.0",
-  "permissions": [
-    "activeTab"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/original.png",
-      "48": "images/original.png",
-      "128": "images/original.png"
-    }
-  },
-  "icons": {
-    "16": "images/original.png",
-    "48": "images/original.png",
-    "128": "images/original.png"
+    "default_popup": "hello.html",
+    "default_icon": "images/original.png"
   }
 }
