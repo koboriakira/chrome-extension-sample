@@ -1,14 +1,19 @@
 /** @format */
 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", `Bearer <SLACK_BOT_TOKEN>`);
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+var authorization;
+chrome.storage.sync.get(["slackBotToken"], function (result) {
+  authorization = `Bearer ${result.slackBotToken}`;
+});
 
 chrome.action.onClicked.addListener(async (tab) => {
-  console.log("This is a background script!");
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", authorization);
+  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+  const dataToCopy = `${tab.title}\n${tab.url}`;
   var urlencoded = new URLSearchParams();
-  urlencoded.append("text", "Hello!");
-  urlencoded.append("channel", "openai");
+  urlencoded.append("text", `気になる:\n${dataToCopy}`);
+  urlencoded.append("channel", "general");
 
   var requestOptions = {
     method: "POST",
@@ -21,14 +26,6 @@ chrome.action.onClicked.addListener(async (tab) => {
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
-
-  const dataToCopy = `${tab.title}\n${tab.url}`;
-  navigator.clipboard.writeText(dataToCopy).then(
-    function () {
-      console.log("Copying to clipboard was successful!");
-    },
-    function (err) {
-      console.error("Could not copy text: ", err);
-    }
-  );
 });
+
+console.log("background script is loaded!");

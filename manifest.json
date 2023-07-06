@@ -3,13 +3,15 @@
   "host_permissions": [
     "https://slack.com/"
   ],
+  "options_page": "options.html",
   "name": "Focus Mode",
   "description": "Enable focus mode on Chrome's official Extensions and Chrome Web Store documentation.",
   "version": "1.0",
   "permissions": [
     "activeTab",
     "scripting",
-    "clipboardWrite"
+    "clipboardWrite",
+    "storage"
   ],
   "background": {
     "service_worker": "scripts/background.js"
